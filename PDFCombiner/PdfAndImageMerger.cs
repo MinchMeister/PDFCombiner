@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using PDFCombiner.StaticHelper;
 
 namespace PDFCombiner
 {
@@ -27,6 +27,7 @@ namespace PDFCombiner
         {
             CreatePdfsFromImagesAndPdfs(outputPdfFullName, pathToImagesAndPdfs, ".*");
         }
+
         public static void CreatePdfsFromImagesAndPdfs(string outputPdfFullName, string pathToImagesAndPdfs, string fileNamePattern)
         {
             if (File.Exists(outputPdfFullName))
@@ -89,7 +90,9 @@ namespace PDFCombiner
             document.Save(outputPdfFullName);
             //Process.Start(outputPdfFullName);
         }
+
         public static void AppendPdfToExistingPdf(string pathToPdf, string pathToNewPdf) { }
+
         public static void AppendImageToExistingPdf(string pathToPdf, Image imageToAdd)
         {
             int x = PageMarginLeft;
@@ -105,7 +108,11 @@ namespace PDFCombiner
             document.Save(pathToPdf);
             document.Close();
         }
+
         public static void AppendTextToExistingPdf(string pathToPdf, string textToAdd) { }
+
+
+
 
         private static PdfDocument AddTiffToPdfDocument(PdfDocument document, string pathToTiff)
         {
@@ -126,6 +133,7 @@ namespace PDFCombiner
             }
             return document;
         }
+
         private static PdfDocument AddImagesToPdfDocument(PdfDocument document, List<string> imagePaths)
         {
             int maxImagesOnPage = 3;
@@ -154,6 +162,7 @@ namespace PDFCombiner
             }
             return document;
         }
+
         private static PdfDocument AddPdfToPdfDocument(PdfDocument document, string pathToPdf)
         {
             PdfDocument pdfToAppendToDocument = PdfReader.Open(pathToPdf, PdfDocumentOpenMode.Import);
@@ -163,6 +172,7 @@ namespace PDFCombiner
             }
             return document;
         }
+
         private static List<string> FilterImagesAndPdfsInADirectory(string pathToDirectory, string fileNamePattern, OrderFilesByOptions orderFilesBy)
         {
             List<string> fullNames = new List<string>();
@@ -196,6 +206,7 @@ namespace PDFCombiner
             return fullNames; //Not sure if its better to throw an error, or to return an empty list.
 
         }
+
         private static List<string> GetFileFullNamesInDirectoryByCreationTime(string pathToDirectory)
         {
             List<string> fullNames = new List<string>();
@@ -204,6 +215,7 @@ namespace PDFCombiner
             );
             return fullNames;
         }
+
         private static List<string> GetFileFullNamesInDirectoryByModifiedDate(string pathToDirectory)
         {
             List<string> fullNames = new List<string>();
@@ -212,6 +224,7 @@ namespace PDFCombiner
             );
             return fullNames;
         }
+
         private static List<string> GetFileFullNamesInDirectoryByName(string pathToDirectory)
         {
             List<string> fullNames = new List<string>();
@@ -220,19 +233,23 @@ namespace PDFCombiner
             );
             return fullNames;
         }
-        private static bool FileIsAPdf(string fileFullName)
-        {
-            return (new FileInfo(fileFullName)).Extension.ToLower().Contains("pdf");
+
+        //IsPDF
+        internal virtual bool FileIsAPdf(string fileFullName)
+        {    
+            FileInfo a = new FileInfo(fileFullName);
+            return a.IsPDF();
         }
+
         private static bool FileIsATiff(string fileFullName)
         {
             return (new FileInfo(fileFullName)).Extension.ToLower().Contains("tif");
         }
+
         private static bool FileIsAnImage(string imageFullName)
         {
             List<string> allowableImageExtensions = new List<string> { ".jpg", ".png", ".bmp", ".jpeg" };
             return allowableImageExtensions.Contains(Path.GetExtension(imageFullName));
-
         }
 
     }
