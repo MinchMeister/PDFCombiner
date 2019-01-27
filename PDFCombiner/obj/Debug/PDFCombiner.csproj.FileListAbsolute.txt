@@ -1,0 +1,13 @@
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\PDFCombiner.dll
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\PDFCombiner.pdb
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\PdfSharp.Charting.dll
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\PdfSharp.dll
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\PdfSharp.xml
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\PdfSharp.Charting.xml
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\de\PdfSharp.resources.dll
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\bin\Debug\de\PdfSharp.Charting.resources.dll
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.csprojAssemblyReference.cache
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.csproj.CoreCompileInputs.cache
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.csproj.CopyComplete
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.dll
+c:\users\bminc\source\repos\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.pdb
