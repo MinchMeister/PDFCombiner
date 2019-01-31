@@ -15,12 +15,68 @@ using PDFCombiner.StaticHelper;
 
 namespace PDFCombiner
 {
+
+    //http://www.pdfsharp.net/wiki/concatenatedocuments-sample.ashx?AspxAutoDetectCookieSupport=1
     public class PdfAndImageMerger
     {
         public enum OrderFilesByOptions { NAME, CREATION_TIME, MODIFIED_DATE };
         static readonly int PageMarginTop = 25;
         static readonly int PageMarginLeft = 25;
         static readonly int PageBodyWidth = 550;
+
+
+
+        //Brad code messing around
+        public static void CombinePdfsByDirectory(string directory)  //json as input for API
+        {
+            
+            if (String.IsNullOrEmpty(directory)) return; //Should return an Exception 
+
+
+
+            //determine if directory exists
+            bool dirExists = Directory.Exists(directory);
+            if (!dirExists) return; //should return an Exception
+
+            //get all files in directory
+            List<string> fileList = Directory.GetFiles(directory).ToList();  //can overload with search pattern
+
+            //does list have files and is greater than 1
+            if (fileList.Count() < 2) return; //should return an Exception
+
+            //not sure what to do at this point
+
+            PdfDocument outputDocument = new PdfDocument();
+
+            //combine
+            foreach (var file in fileList)
+            {
+                if (file.IsPDF())
+                {
+                    //Open the document to import pages from it
+                    PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
+
+                    //Iterate Pages
+                    int count = inputDocument.PageCount;
+
+                    for (int idx = 0; idx < count; idx++)
+                    {
+                        // Get the page from the external document...
+                        PdfPage page = inputDocument.Pages[idx];
+                        // ...and add it to the output document.
+                        outputDocument.AddPage(page);
+                    }
+                }
+            }
+
+            // Save the document...
+            const string filename = "ConcatenatedDocument1_tempfile.pdf";
+            outputDocument.Save(filename);
+            // ...and start a viewer.
+            Process.Start(filename);
+        }
+
+
 
 
         public static void CreatePdfsFromImagesAndPdfs(string outputPdfFullName, string pathToImagesAndPdfs)
@@ -30,10 +86,8 @@ namespace PDFCombiner
 
         public static void CreatePdfsFromImagesAndPdfs(string outputPdfFullName, string pathToImagesAndPdfs, string fileNamePattern)
         {
-            if (File.Exists(outputPdfFullName))
-            {
-                File.Delete(outputPdfFullName);
-            }
+            if (File.Exists(outputPdfFullName)) File.Delete(outputPdfFullName);
+            
             PdfDocument document = new PdfDocument();
 
             //Get All the File Names in the directory
@@ -50,9 +104,9 @@ namespace PDFCombiner
             //If a file leads to an image, keep loading image paths until you run out of files or run into a pdf. Then, Add all those images at the same time, via list
 
             List<string> currentSegmentOfConsecutiveImagePaths = new List<string>();
-            foreach (string pathToImageOrPdf in pathsToImagesAndPdfs)
+            foreach (string file in pathsToImagesAndPdfs)
             {
-                if (FileIsAPdf(pathToImageOrPdf))
+                if (file.IsPDF())
                 {
                     //DUPLICATE CODE
                     if (currentSegmentOfConsecutiveImagePaths.Count > 0)
@@ -60,18 +114,19 @@ namespace PDFCombiner
                         document = AddImagesToPdfDocument(document, currentSegmentOfConsecutiveImagePaths);
                         currentSegmentOfConsecutiveImagePaths.Clear();
                     }
-                    document = AddPdfToPdfDocument(document, pathToImageOrPdf);
+                    document = AddPdfToPdfDocument(document, file);
                 }
-                if (FileIsATiff(pathToImageOrPdf))
+                if (file.IsTIFF())
                 {
-                    document = AddTiffToPdfDocument(document, pathToImageOrPdf);
+                    document = AddTiffToPdfDocument(document, file);
                 }
 
-                if (FileIsAnImage(pathToImageOrPdf))
+                if (file.IsImage())
                 {
-                    currentSegmentOfConsecutiveImagePaths.Add(pathToImageOrPdf);
+                    currentSegmentOfConsecutiveImagePaths.Add(file);
                 }
             }
+
             //DUPLICATE CODE
             if (currentSegmentOfConsecutiveImagePaths.Count > 0)
             {
@@ -234,8 +289,19 @@ namespace PDFCombiner
             return fullNames;
         }
 
+
+        internal virtual bool IsValidFile(string filePath)
+        {
+            if (String.IsNullOrEmpty(filePath)) return false;
+
+            FileInfo fileInfo = new FileInfo(filePath);
+            return fileInfo.Exists;
+        }
+
+
+
         //IsPDF
-        internal virtual bool FileIsAPdf(string fileFullName)
+        private static bool FileIsAPdf(string fileFullName)
         {    
             FileInfo a = new FileInfo(fileFullName);
             return a.IsPDF();
