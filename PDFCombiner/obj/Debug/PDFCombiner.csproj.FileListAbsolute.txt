@@ -24,3 +24,6 @@ Z:\devl\workspaces\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.csproj.CoreComp
 Z:\devl\workspaces\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.csproj.CopyComplete
 Z:\devl\workspaces\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.dll
 Z:\devl\workspaces\PDFCombiner\PDFCombiner\obj\Debug\PDFCombiner.pdb
+Z:\devl\workspaces\PDFCombiner\PDFCombiner\bin\Debug\Newtonsoft.Json.dll
+Z:\devl\workspaces\PDFCombiner\PDFCombiner\bin\Debug\Newtonsoft.Json.pdb
+Z:\devl\workspaces\PDFCombiner\PDFCombiner\bin\Debug\Newtonsoft.Json.xml

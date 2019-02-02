@@ -36,3 +36,6 @@ Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\obj\Debug\PDFCombinerTests.cspro
 Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\obj\Debug\PDFCombinerTests.csproj.CopyComplete
 Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\obj\Debug\PDFCombinerTests.dll
 Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\obj\Debug\PDFCombinerTests.pdb
+Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\bin\Debug\Newtonsoft.Json.dll
+Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\bin\Debug\Newtonsoft.Json.pdb
+Z:\devl\workspaces\PDFCombiner\PDFCombinerTests\bin\Debug\Newtonsoft.Json.xml

@@ -1,17 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PDFCombiner;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PDFCombiner.Tests
 {
     [TestClass()]
     public class PdfAndImageMergerTests
     {
+
+
+
+
         [TestMethod()]
         public void CombinePdfsByDirectoryTest()
         {
@@ -20,7 +18,11 @@ namespace PDFCombiner.Tests
             directory = Directory.GetParent(directory).FullName;
             directory = directory + "\\Data";
 
-            PdfAndImageMerger.CombinePdfsByDirectory(directory);
+            PdfAndImageMerger pdfAndImageMerger = new PdfAndImageMerger();
+
+            var result = pdfAndImageMerger.CombinePdfsByDirectory(directory, "CombinedFileYAY");
+
+            Assert.IsNotNull(result);
         }
 
 
@@ -56,6 +58,44 @@ namespace PDFCombiner.Tests
 
         [TestMethod()]
         public void AppendTextToExistingPdfTest()
+        {
+            Assert.Fail();
+        }
+
+
+
+        [TestMethod()]
+        public void CombinePdfsByDirectoryTest1()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void CreatePdfsFromImagesAndPdfsTest2()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void CreatePdfsFromImagesAndPdfsTest3()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void AppendPdfToExistingPdfTest1()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void AppendImageToExistingPdfTest1()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void AppendTextToExistingPdfTest1()
         {
             Assert.Fail();
         }
